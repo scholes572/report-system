@@ -87,3 +87,27 @@ def register():
         'message': 'User registered successfully',
         'user': new_user.to_dict()
     }), 201
+
+
+
+@app.route('/auth/login', methods=['POST'])
+def login():
+    data = request.get_json()
+    
+    if not data or not data.get('email') or not data.get('password'):
+        return jsonify({'error': 'Missing email or password'}), 400
+    
+    user = User.query.filter_by(email=data['email']).first()
+    
+    if not user or not check_password_hash(user.password, data['password']):
+        return jsonify({'error': 'Invalid credentials'}), 401
+    
+    access_token = create_access_token(
+        identity=user.id,
+        additional_claims={'role': user.role}
+    )
+    
+    return jsonify({
+        'access_token': access_token,
+        'user': user.to_dict()
+    }), 200
