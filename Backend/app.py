@@ -171,3 +171,35 @@ def get_leave_requests():
     return jsonify({
         'leave_requests': [req.to_dict() for req in requests]
     }), 200
+
+
+@app.route('/leaves/<int:leave_id>/status', methods=['PATCH'])
+@jwt_required()
+def update_leave_status(leave_id):
+    claims = get_jwt()
+    role = claims.get('role')
+    
+    if role != 'admin':
+        return jsonify({'error': 'Admin access required'}), 403
+    
+    data = request.get_json()
+    
+    if not data or not data.get('status'):
+        return jsonify({'error': 'Status is required'}), 400
+    
+    status = data['status']
+    if status not in ['approved', 'rejected', 'pending']:
+        return jsonify({'error': 'Invalid status'}), 400
+    
+    leave_request = LeaveRequest.query.get(leave_id)
+    
+    if not leave_request:
+        return jsonify({'error': 'Leave request not found'}), 404
+    
+    leave_request.status = status
+    db.session.commit()
+    
+    return jsonify({
+        'message': f'Leave request {status}',
+        'leave_request': leave_request.to_dict()
+    }), 200
