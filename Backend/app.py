@@ -223,3 +223,20 @@ def init_db():
             print('✅ Default admin created: admin@company.com / admin123')
         else:
             print('✅ Admin account already exists')
+
+
+# Root route for testing
+@app.route('/', methods=['GET'])
+def home():
+    return jsonify({
+        'message': 'Leave Management System API',
+        'status': 'running',
+        'endpoints': {
+            'auth': ['/auth/register', '/auth/login'],
+            'leaves': ['/leaves', '/leaves/<id>/status']
+        }
+    }), 200
+
+if __name__ == '__main__':
+    init_db()
+    app.run(debug=True, port=5000)
