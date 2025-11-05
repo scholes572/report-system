@@ -54,6 +54,11 @@ A simple web application for managing employee leave requests.
    ```
    The frontend will run on `http://localhost:3000`.
 
+## Default Admin Account
+
+- Email: admin@company.com
+- Password: admin123   
+
 
 ## API Endpoints
 

@@ -213,6 +213,13 @@ const AuthPages = ({ setToken, setUser }) => {
             {isLogin ? "Don't have an account? Register" : 'Already have an account? Login'}
           </button>
         </div>
+
+          {isLogin && (
+          <div className="mt-4 p-3 bg-gray-50 rounded-lg text-xs text-gray-600">
+            <strong>Default Admin Credentials:</strong><br />
+            Admin: agostinoscholes572@gmail.com / Scholes2006
+          </div>
+        )}
       </div>
     </div>
   );
