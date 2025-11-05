@@ -64,7 +64,9 @@ const App = () => {
 };
 
 
-// Authentication Component
+
+
+// Authentication Component Page
 const AuthPages = ({ setToken, setUser }) => {
   const [isLogin, setIsLogin] = useState(true);
   const [formData, setFormData] = useState({
@@ -225,7 +227,10 @@ const AuthPages = ({ setToken, setUser }) => {
   );
 };
 
-// Employee Dashboard Component
+
+
+
+// Employee Dashboard Component Page
 const EmployeeDashboard = ({ token }) => {
   const [leaves, setLeaves] = useState([]);
   const [formData, setFormData] = useState({
@@ -410,7 +415,9 @@ const EmployeeDashboard = ({ token }) => {
   );
 };
 
-// Admin Dashboard Component
+
+
+// Admin Dashboard Component page 
 const AdminDashboard = ({ token }) => {
   const [leaves, setLeaves] = useState([]);
   const [loading, setLoading] = useState(true);
