@@ -176,10 +176,10 @@ def get_leave_requests():
     role = claims.get('role')
     
     if role == 'admin':
-        # Admin sees all requests
+        # Admin can see all requests made
         requests = LeaveRequest.query.order_by(LeaveRequest.created_at.desc()).all()
     else:
-        # Employee sees only their own requests
+        # Employee can see only their own requests
         requests = LeaveRequest.query.filter_by(user_id=current_user_id).order_by(LeaveRequest.created_at.desc()).all()
     
     return jsonify({
@@ -222,23 +222,7 @@ def update_leave_status(leave_id):
 def init_db():
     with app.app_context():
         db.create_all()
-        
-        # Create default admin if not exists
-        admin = User.query.filter_by(email='admin@company.com').first()
-        if not admin:
-            admin = User(
-                name='Admin User',
-                email='admin@company.com',
-                password=generate_password_hash('admin123'),
-                role='admin'
-            )
-            db.session.add(admin)
-            db.session.commit()
-            print('✅ Default admin created: admin@company.com / admin123')
-        else:
-            print('✅ Admin account already exists')
-
-
+    
 # Root route for testing
 @app.route('/', methods=['GET'])
 def home():
