@@ -410,9 +410,27 @@ const EmployeeDashboard = ({ token }) => {
   );
 };
 
+// Admin Dashboard Component
+const AdminDashboard = ({ token }) => {
+  const [leaves, setLeaves] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [filter, setFilter] = useState('all');
 
+  useEffect(() => {
+    fetchLeaves();
+  }, []);
 
-
-
-
-
+  const fetchLeaves = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch(`${API_URL}/leaves`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      const data = await response.json();
+      setLeaves(data.leave_requests || []);
+    } catch (err) {
+      console.error('Error fetching leaves:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
