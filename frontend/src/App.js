@@ -434,3 +434,22 @@ const AdminDashboard = ({ token }) => {
       setLoading(false);
     }
   };
+
+   const updateStatus = async (leaveId, status) => {
+    try {
+      const response = await fetch(`${API_URL}/leaves/${leaveId}/status`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({ status })
+      });
+
+      if (response.ok) {
+        fetchLeaves();
+      }
+    } catch (err) {
+      console.error('Error updating status:', err);
+    }
+  };
