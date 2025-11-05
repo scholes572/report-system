@@ -56,8 +56,8 @@ A simple web application for managing employee leave requests.
 
 ## Default Admin Account
 
-- Email: admin@company.com
-- Password: admin123   
+- Email: agostinoscholes572@gmail.com
+- Password: Scholes2006   
 
 
 ## API Endpoints
