@@ -240,3 +240,17 @@ const EmployeeDashboard = ({ token }) => {
     fetchLeaves();
   }, []);
 
+
+  const fetchLeaves = async () => {
+    try {
+      const response = await fetch(`${API_URL}/leaves`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      const data = await response.json();
+      setLeaves(data.leave_requests || []);
+    } catch (err) {
+      console.error('Error fetching leaves:', err);
+    }
+  };
+
+
