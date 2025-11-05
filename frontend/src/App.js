@@ -224,3 +224,19 @@ const AuthPages = ({ setToken, setUser }) => {
     </div>
   );
 };
+
+// Employee Dashboard Component
+const EmployeeDashboard = ({ token }) => {
+  const [leaves, setLeaves] = useState([]);
+  const [formData, setFormData] = useState({
+    start_date: '',
+    end_date: '',
+    reason: ''
+  });
+  const [message, setMessage] = useState({ type: '', text: '' });
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    fetchLeaves();
+  }, []);
+
