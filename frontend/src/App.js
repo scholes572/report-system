@@ -453,3 +453,15 @@ const AdminDashboard = ({ token }) => {
       console.error('Error updating status:', err);
     }
   };
+
+    const filteredLeaves = filter === 'all' 
+    ? leaves 
+    : leaves.filter(leave => leave.status === filter);
+
+  const stats = {
+    total: leaves.length,
+    pending: leaves.filter(l => l.status === 'pending').length,
+    approved: leaves.filter(l => l.status === 'approved').length,
+    rejected: leaves.filter(l => l.status === 'rejected').length
+  };
+
