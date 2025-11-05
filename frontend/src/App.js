@@ -281,6 +281,16 @@ const EmployeeDashboard = ({ token }) => {
         throw new Error(data.error || 'Failed to submit request');
       }
 
+         setMessage({ type: 'success', text: 'Leave request submitted successfully!' });
+      setFormData({ start_date: '', end_date: '', reason: '' });
+      fetchLeaves();
+    } catch (err) {
+      setMessage({ type: 'error', text: err.message });
+    } finally {
+      setLoading(false);
+    }
+  };
+
 
 
 
